@@ -1,20 +1,15 @@
 <?php
+require_once __DIR__.'/../vendor/autoload.php';
 
-    require_once __DIR__.'/../vendor/autoload.php';
-    use app\core\Application;
+use app\core\Application;
+use app\controllers\SiteController;
 
-    $app = new Application();
+$app = new Application(dirname(__DIR__));
 
-    // Here you can define many routes as you want
-    
-    $app->router->get('/', function(){
+// Here you can define many routes as you want
 
-        return 'hello world';
-    });
+$app->router->get('/', 'home');
+$app->router->get('/contact', 'contact');
+$app->router->post('/contact', [SiteController::class, 'handleForm']);
 
-    $app->router->get('/users', function(){
-
-        return 'this is users';
-    });
-
-    $app->run();
+$app->run();
