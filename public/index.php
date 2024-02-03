@@ -8,8 +8,8 @@ $app = new Application(dirname(__DIR__));
 
 // Here you can define many routes as you want
 
-$app->router->get('/', 'home');
-$app->router->get('/contact', 'contact');
+$app->router->get('/', [SiteController::class, 'home']);
+$app->router->get('/contact', [SiteController::class, 'getForm']);
 $app->router->post('/contact', [SiteController::class, 'handleForm']);
 
 $app->run();

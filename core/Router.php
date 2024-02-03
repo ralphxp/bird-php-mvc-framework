@@ -49,14 +49,14 @@
              $callback[0] = new $callback[0];
            }
        
-          return call_user_func($callback);
+          return call_user_func($callback, $this->request);
         }
 
-        public function renderView($view){
+        public function renderView($view, $params = []){
 
             $layoutContent = $this->layoutContent();
 
-            $viewContent = $this->renderOnlyView($view);
+            $viewContent = $this->renderOnlyView($view, $params);
 
             return str_replace('{{content}}', $viewContent, $layoutContent);
         }
@@ -71,7 +71,12 @@
 
         }
         
-        public function renderOnlyView($view){
+        public function renderOnlyView($view, $params){
+
+            foreach($params as $key => $value){
+
+                $$key = $value;
+            }                                         
 
             ob_start();
 
